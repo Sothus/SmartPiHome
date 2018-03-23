@@ -1,6 +1,7 @@
 import time
 import pigpio
 
+
 class UltrasonicSensor:
 	
 	
@@ -46,10 +47,10 @@ class UltrasonicSensor:
 			self.pi.gpio_trigger(self._trig)
 			start = time.time()
 			while not self._ping:
-				if (time.time()-start) > 5.0:
+				if (time.time()-start) > 1.0:
 					return 20000
 				time.sleep(0.001)
-			return self._time / 1000000.0 * 34030
+			return round((self._time / 1000000.0 * 34030), 2)
 		else:
 			return None
 			
