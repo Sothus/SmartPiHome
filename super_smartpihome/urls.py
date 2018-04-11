@@ -19,5 +19,10 @@ from smartpihome import views
 
 urlpatterns = [
     url(r'^$', views.home_page, name='home'),
+    url(r'^light/', views.light_page, name='light'),
+    url(r'^temperature/', views.temperature_page, name='temperature'),
+    url(r'^sensor/', views.sensor_page, name='sensor'),
+    url(r'^statistic/', views.statistic_page, name='statistic'),
+    url(r'^about/', views.about_page, name='about'),
     url(r'^admin/', admin.site.urls),
 ]
