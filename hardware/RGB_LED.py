@@ -1,12 +1,12 @@
 import pigpio
 
 class RGB_LED:
-    def __init__(self, *args, **kwargs):
 
+    def __init__(self, *args, **kwargs):
         if 'pi' in kwargs:
             self._pi = kwargs['pi']
-        elif ('ip' in kwargs) and ('host' in kwargs):
-            self._pi = pigpio.pi(kwargs['ip'], kwargs['host'])
+        elif ('ip' in kwargs) and ('port' in kwargs):
+            self._pi = pigpio.pi(kwargs['ip'], kwargs['port'])
         else:
             raise NameError("Missing arguments for pigpio initialization")
 
@@ -37,10 +37,12 @@ class RGB_LED:
             self._pi.set_PWM_dutycycle(self._pins[pin], self._colors[pin])
         self._on = True
 
+
     def off(self):
         for pin in self._pins:
             self._pi.set_PWM_dutycycle(self._pins[pin], 0)
         self._on = False
+
 
     def set_color(self, **kwargs):
         if 'red' in kwargs:
