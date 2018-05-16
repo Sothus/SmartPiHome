@@ -25,13 +25,14 @@ SECRET_KEY = '_37ux^8wzwxf9weg1%owep*-5v&+zzku#&au67!dxf26vhtvc2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.105', 'localhost']
+ALLOWED_HOSTS = ['192.168.1.108', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'smartpihome',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,3 +120,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CHANNEL_LAYERS = {
+	'default': {
+		'BACKEND': 'asgi_redis.RedisChannelLayer',
+		'CONFIG': {
+			'hosts': [('localhost', 6379)],
+		},
+		'ROUTING': 'smartpihome.routing.channel_routing',
+	},
+}

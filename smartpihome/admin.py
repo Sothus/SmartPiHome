@@ -6,7 +6,7 @@ class RaspberryPiAdmin(admin.ModelAdmin):
 admin.site.register(RaspberryPi, RaspberryPiAdmin)
 
 class LightAdmin(admin.ModelAdmin):
-    list_display = ['name', 'pin']
+    list_display = ['name', 'pin', 'pi']
 admin.site.register(Light, LightAdmin)
 
 class RGBLightAdmin(admin.ModelAdmin):
@@ -14,7 +14,7 @@ class RGBLightAdmin(admin.ModelAdmin):
 admin.site.register(RGBLight, RGBLightAdmin)
 
 class DistanceSensorAdmin(admin.ModelAdmin):
-    list_display = ['name', 'trigger_pin', 'echo_pin']
+    list_display = ['name', 'trigger_pin', 'echo_pin', 'pi']
 admin.site.register(DistanceSensor, DistanceSensorAdmin)
 
 
