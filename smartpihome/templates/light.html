@@ -1,4 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title %} Light contol page {% endblock %}
-{% block content %}Light page{% endblock %}
+{% block content %}
+<h1>Lights</h1>
+	<ul>
+	{% for light in lights %}
+		<li>{{ light.name }}</li>
+	{% endfor %}
+	</ul>
+<h1>RGB Lights</h1>
+	{% for rgbLight in rgbLights %}
+		<li>{{ rgbLight.name }}</li>
+	{% endfor %}
+
+{% endblock %}

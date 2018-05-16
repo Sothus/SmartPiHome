@@ -1,10 +1,20 @@
 from django.shortcuts import render
+from .models import RGBLight, Light
 
 def home_page(request):
 	return render(request, 'home.html')
 
 def light_page(request):
-	return render(request, 'light.html')
+	lights = Light.objects.all()
+	rgbLights = RGBLight.objects.all()
+	
+	return render(	request,
+					'light.html',
+					{
+						"lights": lights,
+						"rgbLights": rgbLights,
+					})
+
 
 def temperature_page(request):
 	return render(request, 'temperature.html')
