@@ -1,16 +1,42 @@
 {% extends 'base.html' %}
 
 {% block title %} Light contol page {% endblock %}
+
+
 {% block content %}
-<h1>Lights</h1>
-	<ul>
-	{% for light in lights %}
-		<li>{{ light.name }}</li>
-	{% endfor %}
+{% regroup lights by pi as pis%}
+<div class="section">
+	<h1>Lights</h1>
+	<ul class="list-group">
+		{% for pi in pis %}
+			<li class="list-group-item"> <h3> {{ pi.grouper }} </h3>
+			<ul class="list-group"  id="{{ pi.grouper }}">
+			
+			{% for light in lights %}
+				{% if light.pi.name|stringformat:"s" == pi.grouper|stringformat:"s" %}
+					<li class="list-group-item">
+						{{ light.name }}
+						<button type="button" class="btn btn-primary light-button" id="{{ light.name }}">
+						{% if light.is_on %}
+							Wylacz
+						{% else %}
+							Wlacz
+						{% endif %}
+						</button>
+					</li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+			</li>
+		{% endfor %}
 	</ul>
-<h1>RGB Lights</h1>
+	
+	<h1>RGB Lights</h1>
 	{% for rgbLight in rgbLights %}
 		<li>{{ rgbLight.name }}</li>
 	{% endfor %}
+</div>
+
+
 
 {% endblock %}

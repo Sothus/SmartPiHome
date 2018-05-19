@@ -6,15 +6,26 @@ import time, pigpio
 class Command(BaseCommand):
 	
 	def handle(self, *args, **kwargs):
-		pi_db = RaspberryPi.objects.filter(pk=1)
-		pi = pigpio.pi(pi_db[0].address)
-		lights = Light.objects.all()
-		for light in lights:
-			pi.set_mode(light.pin, pigpio.OUTPUT)
+		pi_db = RaspberryPi.objects.all()
+		pis = {}
+		pi_connected = {}
+		for pi in pi_db:
+			pis[pi.name] = pigpio.pi(pi.address)
 			
+
 		while True:
 			lights = Light.objects.all()
 			for light in lights:
-				pi.write(light.pin, light.is_on)
+				if pis[light.pi.name].connected:
+					pis[light.pi.name].set_mode(light.pin, pigpio.OUTPUT)
+					pis[light.pi.name].write(light.pin, light.is_on)
 			time.sleep(1)
+			
+			
+def set_lights():
+	lights = Light.objects.all()
+	for light in lights:
+		pi.set_mode(light.pin, pigpio.OUTPUT)
+		pi.write(light.pin, light.is_on)
+
 		

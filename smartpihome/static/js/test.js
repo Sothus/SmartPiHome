@@ -5,8 +5,6 @@ $(function() {
 
     chatsock.onopen = function() {
            console.log("Connected!");
-           $('#test').text("Connected!");
-           chatsock.send("Connected!");
            console.log(document.URL)
     };
 
@@ -17,5 +15,27 @@ $(function() {
         console.log(message.data)
 
     };
+    
+	$(".light-button").click(function(){
+		console.log("click");
+		var rasp = $(this).parent().parent().attr("id");
+		var message = { "light": this.id, "raspberry": rasp};
+		message = JSON.stringify(message);
+		console.log(message);
+		chatsock.send(message);
+		console.log("PRZED: " + $(this).text());
+		if($.trim($(this).text()) == "Wlacz")
+			$(this).text("Wylacz");
+		else
+			$(this).text("Wlacz");
+			
+		console.log("PO: " + $(this).text());
+	});
+	
+	$(".rgb-light-button").click(function(){
+		console.log("rgb-click");
+		chatosck.send(this.id);
+		
+	});
 
 });
