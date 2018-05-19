@@ -16,6 +16,7 @@ class Light(models.Model):
 	name = models.CharField(max_length=200,
 							db_index=True)
 	pin = models.IntegerField()
+	is_on = models.BooleanField(default=False)
 	
 	pi = models.ForeignKey(
 		"RaspberryPi",
@@ -26,8 +27,23 @@ class Light(models.Model):
 	def __str__(self):
 		return self.name
 
-class RGBLight(Light):
-	pass
+
+class RGBLight(models.Model):
+	id = models.AutoField(primary_key=True)
+	name = models.CharField(max_length=200,
+							db_index=True)
+	pinRed = models.IntegerField()
+	pinGreen = models.IntegerField()
+	pinBlue = models.IntegerField()
+	
+	pi = models.ForeignKey(
+		"RaspberryPi",
+		on_delete=models.CASCADE,
+		default=0,
+	)
+	
+	def __str__(self):
+		return self.name
 
 class DistanceSensor(models.Model):
 	name = models.CharField(max_length=200,

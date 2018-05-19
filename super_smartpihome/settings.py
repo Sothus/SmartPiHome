@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['192.168.1.108', 'localhost']
 
 INSTALLED_APPS = [
     'smartpihome',
+    'backgroundWorker',
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',
