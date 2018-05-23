@@ -36,6 +36,12 @@ class RGBLight(models.Model):
 	pinGreen = models.IntegerField()
 	pinBlue = models.IntegerField()
 	
+	is_on = models.BooleanField(default=False)
+	
+	colorRed 	= models.IntegerField()
+	colorGreen	= models.IntegerField()
+	colorBlue 	= models.IntegerField()
+	
 	pi = models.ForeignKey(
 		"RaspberryPi",
 		on_delete=models.CASCADE,

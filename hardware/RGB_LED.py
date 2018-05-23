@@ -5,13 +5,11 @@ class RGB_LED:
     def __init__(self, *args, **kwargs):
         if 'pi' in kwargs:
             self._pi = kwargs['pi']
-        elif ('ip' in kwargs) and ('port' in kwargs):
-            self._pi = pigpio.pi(kwargs['ip'], kwargs['port'])
+        elif ('ip' in kwargs):
+            self._pi = pigpio.pi(kwargs['ip'], 8888)
         else:
             raise NameError("Missing arguments for pigpio initialization")
 
-        if not self._pi.connected:
-            raise ConnectionRefusedError("Can't connect to Raspberry")
 
         self._on = False
         self._pins  = {
@@ -29,7 +27,9 @@ class RGB_LED:
             self._pi.set_mode(self._pins[pin], pigpio.OUTPUT)
 
         #Prevents LED from flashing
-        self._pi.set_PWM_frequency(8000)
+        self._pi.set_PWM_frequency(self._pins["red"], 8000)
+        self._pi.set_PWM_frequency(self._pins["green"], 8000)
+        self._pi.set_PWM_frequency(self._pins["blue"], 8000)
 
 
     def on(self):

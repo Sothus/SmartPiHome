@@ -10,7 +10,7 @@ class LightAdmin(admin.ModelAdmin):
 admin.site.register(Light, LightAdmin)
 
 class RGBLightAdmin(admin.ModelAdmin):
-    list_display = ['name', 'pinRed', 'pinGreen', 'pinBlue']
+    list_display = ['name', 'pinRed', 'pinGreen', 'pinBlue', "colorRed", "colorGreen", "colorBlue"]
 admin.site.register(RGBLight, RGBLightAdmin)
 
 class DistanceSensorAdmin(admin.ModelAdmin):

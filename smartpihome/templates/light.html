@@ -32,9 +32,36 @@
 	</ul>
 	
 	<h1>RGB Lights</h1>
-	{% for rgbLight in rgbLights %}
-		<li>{{ rgbLight.name }}</li>
-	{% endfor %}
+	<ul class="list-group">
+		{% for pi in pis %}
+			<li class="list-group-item"> <h3> {{ pi.grouper }} </h3>
+			<ul class="list-group"  id="{{ pi.grouper }}">
+			
+			{% for rgb_light in rgbLights %}
+				{% if rgb_light.pi.name|stringformat:"s" == pi.grouper|stringformat:"s" %}
+					<li class="list-group-item">
+						{{ rgb_light.name }}
+						<button type="button" class="btn btn-primary rgb-light-button" id="{{ rgb_light.name }}">
+						{% if rgb_light.is_on %}
+							Wylacz
+						{% else %}
+							Wlacz
+						{% endif %}
+						</button>
+						R: <input class="red_input" type="number" min="0" max="100" step="1" value="{{ rgb_light.colorRed }}">
+						G: <input class="green_input" type="number" min="0" max="100" step="1" value="{{ rgb_light.colorGreen }}">
+						B: <input class="blue_input" type="number" min="0" max="100" step="1" value="{{ rgb_light.colorBlue }}">
+						<button type="button" class="btm btn-primary rgb-light-set-button" id="{{ rgb_light.name }}">
+							USTAW
+						</button>
+					</li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+			</li>
+		{% endfor %}
+	</ul>
+
 </div>
 
 

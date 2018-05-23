@@ -20,23 +20,51 @@ def ws_message(message):
 	
 	if group_name == "light":
 		dict_message = json.loads(message['text'])
-		led = Light.objects.filter(name=dict_message['light'], pi__name=dict_message['raspberry'])
-		if led:
-			led = led[0]
-		else:
-			return None
+		if "light" in dict_message:
+			led = Light.objects.filter(name=dict_message['light'], pi__name=dict_message['raspberry'])
+			if led:
+				led = led[0]
+			else:
+				return None
+				
+			print(led)
+			if led.is_on:
+				print(led.is_on)
+				led.is_on = False
+			else:
+				led.is_on = True	
+			led.save()
 			
-		print(led)
-		if led.is_on:
-			print(led.is_on)
-			led.is_on = False
-		else:
-			led.is_on = True
+		if "rgb_light" in dict_message:
+			rgb_led = RGBLight.objects.filter(name=dict_message['rgb_light'], pi__name=dict_message['raspberry'])
+			if rgb_led:
+				rgb_led = rgb_led[0]
+			else:
+				return None
+				
+			print(rgb_led)
+			if rgb_led.is_on:
+				print(rgb_led.is_on)
+				rgb_led.is_on = False
+			else:
+				rgb_led.is_on = True	
+			rgb_led.save()
 			
-		led.save()
-		
-	elif group_name == "rgb_light":
-		pass
+			
+		if "rgb_light_set" in dict_message:
+			rgb_led = RGBLight.objects.filter(name=dict_message['rgb_light_set'], pi__name=dict_message['raspberry'])
+			if rgb_led:
+				rgb_led = rgb_led[0]
+			else:
+				return None
+				
+			print(rgb_led)
+			rgb_led.colorRed = dict_message['red_val']
+			rgb_led.colorGreen = dict_message['green_val']
+			rgb_led.colorBlue = dict_message['blue_val']
+			
+			rgb_led.save()
+
 	elif group_name == "temperature":
 		pass
 	
