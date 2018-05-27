@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block title %} Light contol page {% endblock %}
 
@@ -63,7 +65,8 @@
 	</ul>
 
 </div>
+{% endblock %}
 
-
-
+{% block scripts %}
+	<script type="text/javascript" src='{% static "js/lights.js" %}'></script>
 {% endblock %}

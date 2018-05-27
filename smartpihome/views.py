@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import RGBLight, Light
+from .models import RGBLight, Light, TemperatureSensor
 
 def home_page(request):
 	return render(request, 'home.html')
@@ -17,7 +17,12 @@ def light_page(request):
 
 
 def temperature_page(request):
-	return render(request, 'temperature.html')
+	temperature_sensors = TemperatureSensor.objects.all()
+	return render(	request, 
+					'temperature.html',
+					{
+						"temps": temperature_sensors,
+					})
 
 def sensor_page(request):
 	return render(request, 'sensor.html')

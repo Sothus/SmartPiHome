@@ -1,4 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Temperature control page{% endblock %}
-{% block content %}Temperature page{% endblock %}
+{% block content %}
+<div class="section">
+	<h1>Temperature Sensors</h1>
+	<ul class="list-group">
+
+			
+		{% for temp in temps %}
+			<li class="list-group-item">
+				<div id="{{ temp.sensor_id }}">
+					{{ temp.name }}: 
+				</div>
+
+			</li>
+
+		{% endfor %}
+
+	</ul>
+	
+</div>
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src='{% static "js/temp.js" %}'></script>
+{% endblock %}

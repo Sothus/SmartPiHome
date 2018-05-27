@@ -32,6 +32,8 @@ class ThermometerHandler(object):
         
         if temp != 99999:
             print("Temp in celsius: " + '{:.3f}'.format(int(temp)/float(1000)))
+            
+        return int(temp)/float(1000)
 
     def get_temperature_kelvin(self):
         
@@ -40,8 +42,11 @@ class ThermometerHandler(object):
         if temp != 99999:
             print("Temp in kelvin: " + '{:.3f}'.format(int(temp)/float(1000) + 273.15))
     
+        return int(temp)/float(1000) + 273.15
+        
+        
 if __name__ == '__main__':
 
-  tempSensor = ThermometerHandler('28-000008b810d9')
+  tempSensor = ThermometerHandler('00-800000000000')
   tempSensor.get_temperature_celsius()
   tempSensor.get_temperature_kelvin()
