@@ -15,6 +15,8 @@ class GarageParkingAssistant:
 		self.led3 = LED(self.pi, led3)
 		self.led4 = LED(self.pi, led4)
 		self.buzz = buzz
+		
+		self.pi.set_PWM_dutycycle(buzz, 200)
 
 		self.cleaner = SignalHandler()
 
@@ -28,26 +30,39 @@ class GarageParkingAssistant:
 			distance = self.sens.read()
 
 			if(distance < 80):
-				self.led4.on()
-			else:
-				self.led4.off()
-
-			if(distance < 60):
-				self.led3.on()
-			else:
-				self.led3.off()
-
-			if(distance < 40):
-				self.led2.on()
-			else:
-				self.led2.off()
-
-			if(distance < 20):
 				self.led1.on()
+				self.pi.set_PWM_dutycycle(self.buzz, 200)
+				self.pi.set_PWM_frequency(self.buzz, 8000)
 			else:
 				self.led1.off()
+				self.pi.set_PWM_dutycycle(self.buzz, 0)
 
-			print(distance, 'cm')
+
+			if(distance < 60):
+				self.led2.on()
+				self.pi.set_PWM_dutycycle(self.buzz, 200)
+				self.pi.set_PWM_frequency(self.buzz, 1600)
+			else:
+				self.led2.off()
+				self.pi.set_PWM_dutycycle(self.buzz, 0)
+
+			if(distance < 40):
+				self.led3.on()
+				self.pi.set_PWM_dutycycle(self.buzz, 200)
+				self.pi.set_PWM_frequency(self.buzz, 2000)
+			else:
+				self.led3.off()
+				self.pi.set_PWM_dutycycle(self.buzz, 0)
+
+			if(distance < 20):
+				self.led4.on()
+				self.pi.set_PWM_dutycycle(self.buzz, 200)
+				self.pi.set_PWM_frequency(self.buzz, 4000)
+			else:
+				self.led4.off()
+				self.pi.set_PWM_dutycycle(self.buzz, 0)
+
+			#print(distance, 'cm')
 			time.sleep(0.03)
 
 		self.clean_up()
@@ -59,6 +74,7 @@ class GarageParkingAssistant:
 		self.led2.off()
 		self.led3.off()
 		self.led4.off()
+		self.pi.set_PWM_dutycycle(self.buzz, 0)
 
 
 class SignalHandler:
@@ -80,7 +96,7 @@ class SignalHandler:
 if __name__ == "__main__":
 
 	gpa = GarageParkingAssistant(
-		pi = '192.168.1.106',
+		pi = '192.168.1.105',
 		trig = 14,
 		echo = 15,
 		led1 = 18,

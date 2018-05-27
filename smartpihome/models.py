@@ -71,3 +71,25 @@ class TemperatureSensor(models.Model):
 							db_index=True)
 	sensor_id = models.CharField(max_length=15,
 								 db_index=True)
+								 
+	def __str__(self):
+		return self.name
+								 
+class GPA(models.Model):
+	name = models.CharField(max_length=200,
+							db_index=True)
+	pi = models.ForeignKey(
+		"RaspberryPi",
+		on_delete=models.CASCADE,
+		default=0,
+	)
+	pinEcho = models.IntegerField()
+	pinTrig = models.IntegerField()
+	pinLed1 = models.IntegerField()
+	pinLed2 = models.IntegerField()
+	pinLed3 = models.IntegerField()
+	pinLed4 = models.IntegerField()
+	pinBuzz = models.IntegerField()
+	
+	def __str__(self):
+		return self.name

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RaspberryPi, Light, RGBLight, DistanceSensor, TemperatureSensor
+from .models import RaspberryPi, Light, RGBLight, DistanceSensor, TemperatureSensor, GPA
 
 class RaspberryPiAdmin(admin.ModelAdmin):
     list_display = ['name', 'address']
@@ -20,6 +20,10 @@ admin.site.register(DistanceSensor, DistanceSensorAdmin)
 class TemperatureSensorAdmin(admin.ModelAdmin):
 	list_display = ['name', 'sensor_id']
 admin.site.register(TemperatureSensor, TemperatureSensorAdmin)
+
+class GPAAdmin(admin.ModelAdmin):
+	list_display = ['name', 'pi']
+admin.site.register(GPA, GPAAdmin)
 
 
 # Register your models here.
