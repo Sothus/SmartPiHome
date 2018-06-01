@@ -1,4 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Sensors page{% endblock %}
-{% block content %}sensor page{% endblock %}
+{% block content %}
+<div class="section">
+	<h1>Humidity Sensors</h1>
+	<ul class="list-group">
+
+			
+		{% for hum in hums %}
+			<li class="list-group-item">
+				<div id="{{ hum.name }}">
+					{{ hum.name }}: 
+				</div>
+			</li>
+		{% endfor %}
+
+	</ul>
+	
+</div>
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src='{% static "js/hum.js" %}'></script>
+{% endblock %}
