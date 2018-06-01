@@ -1,5 +1,3 @@
-'''IF YOU WANT TO RUN THIS SCRIPT, YOU SHOULD DO THIS FROM PARENT DIRECTORY'''
-
 import pigpio, time, signal
 from hardware.UltrasonicSensor import UltrasonicSensor
 from hardware.LED import LED
