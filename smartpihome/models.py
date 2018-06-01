@@ -81,3 +81,17 @@ class GPA(models.Model):
 	
 	def __str__(self):
 		return self.name
+		
+
+class HumiditySensor(models.Model):
+	name = models.CharField(max_length=200,
+							db_index=True)
+
+	pi = models.ForeignKey(
+		"RaspberryPi",
+		on_delete=models.CASCADE,
+		default=0,
+	)
+								 
+	def __str__(self):
+		return self.name
