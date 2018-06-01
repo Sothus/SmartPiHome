@@ -86,7 +86,9 @@ class GPA(models.Model):
 class HumiditySensor(models.Model):
 	name = models.CharField(max_length=200,
 							db_index=True)
-
+	
+	channel = models.IntegerField()
+	
 	pi = models.ForeignKey(
 		"RaspberryPi",
 		on_delete=models.CASCADE,
