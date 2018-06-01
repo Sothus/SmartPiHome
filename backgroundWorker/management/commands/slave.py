@@ -17,7 +17,7 @@ class Command(BaseCommand):
 		pi_connected = {}
 		for pi in pi_db:
 			pis[pi.name] = pigpio.pi(pi.address)
-			
+		
 		#init GPA
 		db_gpas = GPA.objects.all()
 		gpas = {}
@@ -29,7 +29,7 @@ class Command(BaseCommand):
 		for gpa in gpas:
 			print("elo")
 			_thread.start_new_thread(gpas[gpa].start, ())
-			
+		
 		print("wyszedlem")
 		#init LEDs
 		db_lights = Light.objects.all()
