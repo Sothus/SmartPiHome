@@ -18,7 +18,7 @@ from django.contrib import admin
 from smartpihome import views
 
 urlpatterns = [
-    url(r'^$', views.light_page, name='light'),
+    url(r'^$', views.home_page, name='home'),
     url(r'^light/', views.light_page, name='light'),
     url(r'^temperature/', views.temperature_page, name='temperature'),
     url(r'^sensor/', views.sensor_page, name='sensor'),

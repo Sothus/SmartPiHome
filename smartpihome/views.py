@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import RGBLight, Light, TemperatureSensor
 
+
+def home_page(request):
+	return redirect('light/', request)
 
 def light_page(request):
 	lights = Light.objects.all()
