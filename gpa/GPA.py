@@ -16,10 +16,22 @@ class GarageParkingAssistant:
 		self.led4 = LED(self.pi, led4)
 		self.buzz = buzz
 		
-		self.pi.set_PWM_dutycycle(buzz, 200)
+		self.distance_4 = 80
+		self.distance_3 = 60
+		self.distance_2 = 40
+		self.distance_1 = 20
+		
+		self.sound_4 = 8000
+		self.sound_3 = 1600
+		self.sound_2 = 2000
+		self.sound_1 = 4000
+		
+		self.buzz_on = 200
+		self.buzz_off = 0
+		
+		self.pi.set_PWM_dutycycle(buzz, self.buzz_on)
 
 		self.cleaner = SignalHandler()
-
 
 
 	def start(self):
@@ -29,40 +41,39 @@ class GarageParkingAssistant:
 
 			distance = self.sens.read()
 
-			if(distance < 80):
+			if(distance < self.distance_4):
 				self.led1.on()
-				self.pi.set_PWM_dutycycle(self.buzz, 200)
-				self.pi.set_PWM_frequency(self.buzz, 8000)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_on)
+				self.pi.set_PWM_frequency(self.buzz, self.sound_4)
 			else:
 				self.led1.off()
-				self.pi.set_PWM_dutycycle(self.buzz, 0)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_off)
 
 
-			if(distance < 60):
+			if(distance < self.distance_3):
 				self.led2.on()
-				self.pi.set_PWM_dutycycle(self.buzz, 200)
-				self.pi.set_PWM_frequency(self.buzz, 1600)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_on)
+				self.pi.set_PWM_frequency(self.buzz, self.sound_3)
 			else:
 				self.led2.off()
-				self.pi.set_PWM_dutycycle(self.buzz, 0)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_off)
 
-			if(distance < 40):
+			if(distance < self.distance_2):
 				self.led3.on()
-				self.pi.set_PWM_dutycycle(self.buzz, 200)
-				self.pi.set_PWM_frequency(self.buzz, 2000)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_on)
+				self.pi.set_PWM_frequency(self.buzz, self.sound_2)
 			else:
 				self.led3.off()
-				self.pi.set_PWM_dutycycle(self.buzz, 0)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_off)
 
-			if(distance < 20):
+			if(distance < self.distance_1):
 				self.led4.on()
-				self.pi.set_PWM_dutycycle(self.buzz, 200)
-				self.pi.set_PWM_frequency(self.buzz, 4000)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_on)
+				self.pi.set_PWM_frequency(self.buzz, self.sound_1)
 			else:
 				self.led4.off()
-				self.pi.set_PWM_dutycycle(self.buzz, 0)
+				self.pi.set_PWM_dutycycle(self.buzz, self.buzz_off)
 
-			#print(distance, 'cm')
 			time.sleep(0.03)
 
 		self.clean_up()

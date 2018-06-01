@@ -2,7 +2,6 @@ import pigpio
 
 class LED:
 	
-	
 	def __init__(self, pi, pin):
 		self._pi = pi
 		self._pin = pin

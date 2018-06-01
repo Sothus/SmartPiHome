@@ -15,8 +15,6 @@ $(function() {
 			console.log(message.value)
 			$("#" + message.sensor_id).text(message.sensor_name + ": " + message.value);
 		}
-        
-
     };
    
 });

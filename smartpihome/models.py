@@ -11,6 +11,7 @@ class RaspberryPi(models.Model):
 
 	def __str__(self):
 		return self.name
+		
 
 class Light(models.Model):
 	name = models.CharField(max_length=200,
@@ -51,20 +52,6 @@ class RGBLight(models.Model):
 	def __str__(self):
 		return self.name
 
-class DistanceSensor(models.Model):
-	name = models.CharField(max_length=200,
-							db_index=True)
-	trigger_pin = models.IntegerField()
-	echo_pin = models.IntegerField()
-	
-	pi = models.ForeignKey(
-		"RaspberryPi",
-		on_delete=models.CASCADE,
-		default=0,
-	)
-
-	def __str__(self):
-		return self.name
 		
 class TemperatureSensor(models.Model):
 	name = models.CharField(max_length=200,
@@ -74,6 +61,7 @@ class TemperatureSensor(models.Model):
 								 
 	def __str__(self):
 		return self.name
+		
 								 
 class GPA(models.Model):
 	name = models.CharField(max_length=200,

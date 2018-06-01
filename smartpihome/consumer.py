@@ -1,5 +1,5 @@
 from channels import Group
-from .models import RaspberryPi, Light, RGBLight, DistanceSensor
+from .models import RaspberryPi, Light, RGBLight
 import json
 
 def ws_connect(message):
@@ -67,11 +67,13 @@ def ws_message(message):
 
 	elif group_name == "temperature":
 		pass
+		
 	
 def ws_disconnect(message):
 	group_name = get_group(message)
 	print("Someone left us form " + group_name + " group")
 	Group(group_name).discard(message.reply_channel)
+	
 	
 def get_group(message):
 	message_path = message['path']
