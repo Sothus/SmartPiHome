@@ -5,27 +5,21 @@ class ThermometerHandler(object):
 
 
 	def get_temperature(self):
-		
-		try:
-			current_temperature = ''
-			file_name = 'w1_slave'
-			file = open('/sys/bus/w1/devices/' + self.sensor_id + '/' + file_name, 'r')
-			line = file.readline()
-			check = line.rsplit(' ',1)
-			check = check[1].replace('\n', '')
-			
-			if check == 'YES':
-				line = file.readline()
-				current_temperature = line.rsplit('t=',1)
-			else:
-				current_temperature = 99999
-			file.close()
-			
-			return current_temperature[1]
+		current_temperature = ''
+		file = open('/sys/bus/w1/devices/' + self.sensor_id + '/' + 'w1_slave', 'r')
+		line = file.readline()
+		check = line.rsplit(' ',1)
+		check = check[1].replace('\n', '')
 
-		except:
-			print('Error while getting temperature from sensor: ', self.sensor_id)
-			return 99999
+		if check == 'YES':
+			line = file.readline()
+			current_temperature = line.rsplit('t=',1)
+		else:
+			current_temperature = 99999
+		file.close()
+
+		return current_temperature[1]
+
 		
 
 	def get_temperature_celsius(self):
@@ -33,7 +27,7 @@ class ThermometerHandler(object):
 		temp = self.get_temperature()
 		
 		if temp != 99999:
-			print("Temp in celsius: " + '{:.3f}'.format(int(temp)/float(1000)))
+			print("Temperature in celsius: " + '{:.3f}'.format(int(temp)/float(1000)))
 			
 		return int(temp)/float(1000)
 		
@@ -43,7 +37,7 @@ class ThermometerHandler(object):
 		temp = self.get_temperature()
 		
 		if temp != 99999:
-			print("Temp in kelvin: " + '{:.3f}'.format(int(temp)/float(1000) + 273.15))
+			print("Temperature in kelvin: " + '{:.3f}'.format(int(temp)/float(1000) + 273.15))
 	
 		return int(temp)/float(1000) + 273.15
 		
